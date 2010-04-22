@@ -13,6 +13,15 @@ module RFGraph
       end
     end
 
+    object_types :page, :user, :event, :application, :status_message, :photo, :photo_album, :video, :note
+
+    def self.object_types(args)
+      args.each |type| do
+        define_method(get_object(:page)
+      end
+      end
+    end
+
     def get_object(id, args = {})
       parse_response access_token.get(id, args)
     end
