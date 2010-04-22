@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = 'rfgraph'
-  s.version = '0.2'
+  s.version = '0.3'
   s.date = '2010-04-21'
   s.authors = ['Conor Hunt']
   s.email = 'conor.hunt@gmail.com'
@@ -11,4 +11,5 @@ Gem::Specification.new do |s|
   s.files = ['README.md', 'LICENSE'] + Dir['lib/**/*'].to_a
   
   s.add_dependency('json', '>= 1.2.4')
+  s.add_dependency('oauth2', '>= 0.0.2')
 end

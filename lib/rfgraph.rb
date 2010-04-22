@@ -10,9 +10,11 @@ module RFGraph
 
   class RFGraphError < RuntimeError
     attr_accessor :code
+    attr_accessor :json
 
-    def initialize(code, message)
+    def initialize(code, message, json)
       @code = code
+      @json = json
       super(message)
     end
   end
