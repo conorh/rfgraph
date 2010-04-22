@@ -9,6 +9,4 @@ Gem::Specification.new do |s|
   s.description = %q{Ruby wrapper for Facebook Graph API}
 
   s.files = ['README.md', 'LICENSE'] + Dir['lib/**/*'].to_a
-
-  s.add_dependency('oauth', '>= 0.3.6')
 end

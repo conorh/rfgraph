@@ -39,7 +39,7 @@ Example
     #   "updated_time" => "2010-03-30T01:27:19+0000"
     # }
 
-    request.wall_post("Awesome message!")
+    request.put_wall_post("Awesome message!")
 
 COPYRIGHT
 ---------

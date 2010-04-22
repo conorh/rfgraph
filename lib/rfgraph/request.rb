@@ -1,5 +1,6 @@
 require 'json'
-require 'open-uri'
+require 'net/http'
+require 'net/https'
 
 module RFGraph
   class Request
@@ -23,7 +24,7 @@ module RFGraph
     end
 
     def put_object(parent_object, connection_name, data = {})
-      raise "Access token required for put requests" if access_token.nil?
+      raise RFGraphError.new(-1, "Access token required for put requests") if access_token.nil?
       post_request(parent_object + "/" + connection_name, data)
     end
 
@@ -57,17 +58,22 @@ module RFGraph
       end
 
       encoded_url_args = url_args.collect {|k,v| "#{CGI.escape k}=#{CGI.escape v}" }.join("&")
+      url = URI.parse("#{BASE_URL}/#{path}?#{encoded_url_args}")
+      http = Net::HTTP.new(url.host, url.port)
+      http.use_ssl = true
+      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 
       response = if post_args
-        Net::HTTP.post("#{BASE_URL}/#{path}?#{encoded_url_args}", post_args)
+        encoded_post_args = post_args.collect {|k,v| "#{CGI.escape k}=#{CGI.escape v}" }.join("&")
+        http.post("#{url.path}?#{url.query}", encoded_post_args)
       else
-        open("#{BASE_URL}/#{path}?#{encoded_url_args}").read
+        http.get("#{url.path}?#{url.query}")
       end
 
-      response = JSON.parse(response)
+      response = JSON.parse(response.body)
 
       if response["error"]
-        raise RFGraphError(response["error"]["code"], response["error"]["message"])
+        raise RFGraphError.new(response["error"]["code"], response["error"]["message"])
       end
 
       response
