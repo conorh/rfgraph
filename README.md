@@ -33,6 +33,7 @@ With auth token
     auth_url = fauth.authorize_url("http://yourwebsite.com/callback")
 
     # Get the code that facebook returns after the user auths your app and turn that into a auth token
+    # Make sure that the callback url is the same as in the previous request, otherwise the request will fail
     auth_token = fauth.authorize("http://yourwebsite.com/callback", FACEBOOK_CODE)
 
     # Make some requests using the auth token
