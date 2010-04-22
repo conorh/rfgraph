@@ -6,6 +6,8 @@ A simple Ruby wrapper to help use the Facebook Graph API.
 Documentation on the Graph API is available here:
 http://developers.facebook.com/docs/
 
+This code is based off of the Python SDK - http://github.com/facebook/python-sdk/
+
 Install
 -------
 
