@@ -24,7 +24,7 @@ module RFGraph
       url = "#{BASE_URL}/oauth/authorize?client_id=#{app_id}&redirect_uri=#{callback_url}"
       scope = options.delete(:scope)
       url += "&scope=#{scope.join(',')}" unless scope.blank?
-      url += options.to_query unless options.blank? # Add other options. FIXME: to_query method requires Rails?!
+      url += "&#{options.to_query}" unless options.blank? # Add other options. FIXME: to_query method requires Rails?!
       return url
     end
     
