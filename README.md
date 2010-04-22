@@ -29,8 +29,10 @@ With auth token
     require 'rfgraph'
     fauth = RFGraph::Auth.new(APP_ID, APP_SECRET)
 
-    # Get the URL to redirect your user to in their web browser
-    auth_url = fauth.authorize_url("http://yourwebsite.com/callback")
+    # Get the URL to redirect your user to in their web browser.
+    # For options see: http://developers.facebook.com/docs/authentication/
+    # For scope permissions see: http://developers.facebook.com/docs/authentication/permissions
+    auth_url = fauth.authorize_url("http://yourwebsite.com/callback", :display => :popup, :scope => [])
 
     # Get the code that facebook returns after the user auths your app and turn that into a auth token
     # Make sure that the callback url is the same as in the previous request, otherwise the request will fail
