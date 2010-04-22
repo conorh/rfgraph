@@ -57,14 +57,14 @@ module RFGraph
         end
       end
 
-      encoded_url_args = url_args.collect {|k,v| "#{CGI.escape k}=#{CGI.escape v}" }.join("&")
+      encoded_url_args = url_args.collect {|k,v| "#{CGI.escape k.to_s}=#{CGI.escape v.to_s}" }.join("&")
       url = URI.parse("#{BASE_URL}/#{path}?#{encoded_url_args}")
       http = Net::HTTP.new(url.host, url.port)
       http.use_ssl = true
       http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 
       response = if post_args
-        encoded_post_args = post_args.collect {|k,v| "#{CGI.escape k}=#{CGI.escape v}" }.join("&")
+        encoded_post_args = post_args.collect {|k,v| "#{CGI.escape k.to_s}=#{CGI.escape v.to_s}" }.join("&")
         http.post("#{url.path}?#{url.query}", encoded_post_args)
       else
         http.get("#{url.path}?#{url.query}")

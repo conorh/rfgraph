@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = 'rfgraph'
-  s.version = '0.2'
+  s.version = '0.3'
   s.date = '2010-04-21'
   s.authors = ['Conor Hunt']
   s.email = 'conor.hunt@gmail.com'

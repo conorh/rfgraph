@@ -16,6 +16,16 @@ gem install rfgraph
 Example
 -------
 
+Without auth token
+
+    require 'rfgraph'
+    req = RFGraph::Request.new
+    req.get_object("19292868552")
+    req.get_object("99394368305/photos")
+    req.get_object("331218348435", "metadata" => "1")
+
+With auth token
+
     require 'rfgraph'
     fauth = RFGraph::Auth.new(APP_ID, APP_SECRET)
 
@@ -28,18 +38,7 @@ Example
     # Make some requests, auth token is only required if you are doing requests that need it.
     request = RFGraph::Request.new(auth_token)
     request.get_object("me")
-
-    # Returns something like
-    #{
-    #   "id" => "57373737593",
-    #   "name" => "Some User",
-    #   "first_name" => "Some",
-    #   "last_name" => "User",
-    #   "link" => "http://www.facebook.com/someuser",
-    #   "timezone" =>  -4,
-    #   "verified" => true,
-    #   "updated_time" => "2010-03-30T01:27:19+0000"
-    # }
+    request.get_object("me/friends")
 
     request.put_wall_post("Awesome message!")
 
