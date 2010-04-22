@@ -6,7 +6,11 @@ module RFGraph
     attr_accessor :access_token
 
     def initialize(access_token)
-      @access_token = access_token
+      @access_token = if access_token.kind_of?(String)
+        OAuth2::AccessToken.new(nil, access_token)
+      else
+        access_token
+      end
     end
 
     def get_object(id, args = {})
@@ -35,11 +39,44 @@ module RFGraph
     end
 
     def put_like(object_id)
-      parse_response access_token.post("#{object_id}/likes", {"message" => message})
+      parse_response access_token.post("#{object_id}/likes")
+    end
+
+    # You can delete a like by issuing a DELETE request to /POST_ID/likes (since likes don't have an ID).
+    def delete_like(object_id)
+      parse_response delete_object("#{object_id}/likes")
     end
 
     def delete_object(object_id)
-      parse_response access_token.post(object_id, {"message" => message})
+      parse_response access_token.delete(object_id)
+    end
+
+    def search(query, type)
+      get_object("search", :q => query, :type => type)
+    end
+
+    def search_news_feed(query, profile_id = "me")
+      get_object("#{profile_id}/home", :q => query)
+    end
+
+    def search_posts(query)
+      search(query, "post")
+    end
+
+    def search_people(query)
+      search(query, "people")
+    end
+
+    def search_pages(query)
+      search(query, "page")
+    end
+
+    def search_events(query)
+      search(query, "event")
+    end
+
+    def search_groups(query)
+      search(query, "group")
     end
 
     def parse_response(response)

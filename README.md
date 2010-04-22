@@ -23,14 +23,38 @@ Example
 
     # Make some requests
     client = RFGraph::Client.new(access_token)
+
+    # Get the user's profile
     client.get_object("me")
+    
+    # Paginate through your wall posts
+    client.get_object("me/feed")
+    
+    # Get all your wall posts since yesterday
+    client.get_object("me/feed", {:since => "yesterday"})
+    
+    # Get all your wall posts before 6:30pm today
+    client.get_object("me/feed", {:before => })
+    
+    
+    # Get another user's profile, but limit the fields returned
+    client.get_object("bgolub", {:fields => "id,name,picture"})
+
+    # Place a wall post on the auth'd user's wall
     client.put_wall_post("Awesome message!")
-    client.put_wall_post(message, {}, obj)
-    client.get_objects([1,2,3])
+
+    # Plase a wall most with metadata on the auth'd user's wall
+    client.put_wall_post(message, {:picture => "", :link => "", :name => "", :description => ""})
+
+    # Place a wall post on another user's wall
+    client.put_wall_post(message, {}, 'arjun')
+
+    client.get_objects(['arjun','vernal'])
     client.get_connections(obj, "friends")
     client.put_comment(obj, message)
     client.put_like(obj)
     client.delete_object(obj)
+
 
 ATTRIBUTIONS
 ------------

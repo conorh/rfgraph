@@ -1,5 +1,16 @@
-require 'rfgraph/request'
-require 'rfgraph/auth'
+require 'rfgraph/client'
+require 'rfgraph/objects/base'
+require 'rfgraph/objects/album'
+require 'rfgraph/objects/event'
+require 'rfgraph/objects/group'
+require 'rfgraph/objects/link'
+require 'rfgraph/objects/note'
+require 'rfgraph/objects/page'
+require 'rfgraph/objects/photo'
+require 'rfgraph/objects/post'
+require 'rfgraph/objects/status_message'
+require 'rfgraph/objects/user'
+require 'rfgraph/objects/video'
 
 module RFGraph
   BASE_URL = "https://graph.facebook.com"
