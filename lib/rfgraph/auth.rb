@@ -13,8 +13,14 @@ module RFGraph
       @app_secret = app_secret
     end
 
-    def authorize_url(callback_url)
-      "#{BASE_URL}/oauth/authorize?client_id=#{app_id}&redirect_uri=#{callback_url}"
+    # Options:
+    # * :scope - either a String "user_photos,user_videos,stream_publish" or an
+    # Array like [:user_photos, :user_videos, :stream_publish]
+    # For more permission scopes, see http://developers.facebook.com/docs/authentication/permissions
+    def authorize_url(callback_url, options = {})
+      url = "#{BASE_URL}/oauth/authorize?client_id=#{app_id}&redirect_uri=#{callback_url}"
+      url += "&scope=#{options[:scope].join(',')}" unless options[:scope].blank?
+      return url
     end
     
     # Take the oauth2 request token and turn it into an access token 
