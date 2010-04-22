@@ -22,7 +22,7 @@ Without auth token
     req = RFGraph::Request.new
     req.get_object("19292868552")
     req.get_object("99394368305/photos")
-    req.get_object("331218348435", "metadata" => "1")
+    req.get_object("331218348435", :metadata => 1)
 
 With auth token
 
@@ -35,7 +35,7 @@ With auth token
     # Get the code that facebook returns after the user auths your app and turn that into a auth token
     auth_token = fauth.authorize("http://yourwebsite.com/callback", FACEBOOK_CODE)
 
-    # Make some requests, auth token is only required if you are doing requests that need it.
+    # Make some requests using the auth token
     request = RFGraph::Request.new(auth_token)
     request.get_object("me")
     request.get_object("me/friends")
