@@ -25,7 +25,7 @@ Example
     # Get the code that facebook returns after the user auths your app and turn that into a auth token
     auth_token = fauth.authorize("http://yourwebsite.com/callback", FACEBOOK_CODE)
 
-    # Make some requests
+    # Make some requests, auth token is only required if you are doing requests that need it.
     request = RFGraph::Request.new(auth_token)
     request.get_object("me")
 
